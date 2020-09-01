@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class HW4 {
-    static final int SIZE = 3;
+    static final int SIZE = 5;
 //    static final int DOT_TO_WIN = 3;
 
     static final char DOT_X = 'X';
@@ -119,17 +119,29 @@ public class HW4 {
     }
 
     public static boolean checkWin(char c) {
-        if (map[0][0] == c && map[0][1] == c && map[0][2] == c) {return true; }
-        if (map[1][0] == c && map[1][1] == c && map[1][2] == c) {return true; }
-        if (map[2][0] == c && map[2][1] == c && map[2][2] == c) {return true; }
-
-        if (map[0][0] == c && map[1][0] == c && map[2][0] == c) {return true; }
-        if (map[0][1] == c && map[1][1] == c && map[2][1] == c) {return true; }
-        if (map[0][2] == c && map[1][2] == c && map[2][2] == c) {return true; }
-
-        if (map[0][0] == c && map[1][1] == c && map[2][2] == c) {return true; }
-        if (map[0][2] == c && map[1][1] == c && map[2][0] == c) {return true; }
-
+        // проверка победы по вертикали
+        for (int y = 0; y <=1 ; y++) {
+            for (int i = 0; i < SIZE; i++) {
+                if (map[i][y] == c && map[i][y+1] == c && map[i][y+2] == c && map[i][y+3] == c) {return true; }
+            }
+        }
+        // проверка победы по горизонтали
+        for (int x = 0; x <=1 ; x++) {
+            for (int j = 0; j < SIZE; j++) {
+                if (map[x][j] == c && map[x+1][j] == c && map[x+2][j] == c && map[x+3][j] == c) {return true; }
+            }
+        }
+        // проверка победы по диагонали 1
+        int x = 0;
+        for (int y = 0; y <= 1; y++) {
+            if (map[x][y] == c && map[x+1][y+1] == c && map[x+2][y+2] == c && map[x+3][y+3] == c) {return true; }
+            if (map[x+1][y] == c && map[x+2][y+1] == c && map[x+3][y+2] == c && map[x+4][y+3] == c) {return true; }
+        }
+        // проверка победы по диагонали 2
+        for (int y = 0; y <= 1; y++) {
+            if (map[x+4][y] == c && map[x+3][y+1] == c && map[x+2][y+2] == c && map[x+1][y+3] == c) {return true; }
+            if (map[x+3][y] == c && map[x+2][y+1] == c && map[x+1][y+2] == c && map[x][y+3] == c) {return true; }
+        }
         return false;
     }
 
